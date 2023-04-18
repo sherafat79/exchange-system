@@ -1,4 +1,9 @@
+import AuthContext from "@/context/authContext";
+import Link from "next/link";
+import { useContext } from 'react';
+
 export default function Header() {
+  const {userLogined,logOutHandler}=useContext(AuthContext)
   return (
     <header>
       <nav
@@ -46,49 +51,41 @@ export default function Header() {
               data-te-navbar-nav-ref
             >
               <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                <a
+              <Link
                   className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  href="#!"
-                  data-te-nav-link-ref
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
+                  href="/"
+                  
                 >
-                  Home
-                </a>
+                  home
+                </Link>
               </li>
               <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                <a
+                {
+                  userLogined?<Link
                   className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  href="#!"
-                  data-te-nav-link-ref
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
+                  href="/user/dashboard"
+                  
                 >
-                  Features
-                </a>
-              </li>
-              <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                <a
+                  dashboard
+                </Link>:<Link
                   className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  href="#!"
-                  data-te-nav-link-ref
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
+                  href="/auth/signUp"
+                  
                 >
-                  Pricing
-                </a>
+                  sign-up
+                </Link>
+                }
               </li>
-              <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                <a
+             {userLogined&& <li className="mb-4 lg:mb-0 lg:pr-2" >
+             <button
                   className="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                  href="#!"
-                  data-te-nav-link-ref
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
+                  onClick={logOutHandler}
+                  
                 >
-                  About
-                </a>
-              </li>
+                 logout
+                </button>
+                </li>}
+
             </ul>
           </div>
         </div>
